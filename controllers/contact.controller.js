@@ -185,3 +185,18 @@ exports.editContact = async (req, res) => {
     res.redirect("/");
   }
 };
+
+exports.deleteContact = async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.flash("success", "The contact was deleted successfully!");
+    res.redirect("/contacts");
+  } catch (e) {
+    console.log(e);
+    res.flash(
+      "danger",
+      "There was a problem with the system. Please contact the developer."
+    );
+    res.redirect("/");
+  }
+};

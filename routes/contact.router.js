@@ -20,6 +20,10 @@ router
   .post(checkNotLoggedIn, checkIfAdmin, contactController.editContact);
 
 router
+  .route("/delete/:id")
+  .get(checkNotLoggedIn, checkIfAdmin, contactController.deleteContact);
+
+router
   .route("/search")
   .get(checkNotLoggedIn, contactController.renderSearchedContacts);
 
