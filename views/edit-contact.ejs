@@ -29,16 +29,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
         <div class="container-fluid">
             <!-- Form -->
-            <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-                <div class="form-group mb-0">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Search" type="text">
-                    </div>
-                </div>
-            </form>
+            <%- include('./partials/searchForm.ejs')%>
         </div>
     </nav>
     <!-- End Navbar -->
@@ -56,10 +47,10 @@
             <div class="col">
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <h1 class="mb-3">Edit Contact</h1>
+                        <h1 class="mb-3">Edit Contact : <%- contact.name %></h1>
                     </div>
                     <div class="container-fluid">
-                        <form>
+                        <form action="/contacts/edit/<%- contact._id %>" method="post">
                             <h6 class="heading-small text-muted mb-4">Contact information</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
@@ -67,18 +58,20 @@
                                         <div class="form-group">
                                             <input type="text"
                                                    name="name" class="form-control form-control-alternative"
-                                                   placeholder="Name">
+                                                   placeholder="Name"
+                                                   value="<%- contact.name %>"
+                                            >
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <select name="department" class="form-control"
                                                     id="exampleFormControlSelect1">
-                                                <option selected disabled>Department</option>
-                                                <option>IT</option>
-                                                <option>Front Office</option>
-                                                <option>Housekeeping</option>
-                                                <option>Accounts</option>
+                                                <option disabled>Department</option>
+                                                <% departments.forEach(department => { %>
+                                                    <option <%- JSON.stringify(department._id) == JSON.stringify(contact.department) ? 'selected' : null %>
+                                                            value="<%- department._id %>"><%- department.name %></option>
+                                                <% }) %>
                                             </select>
                                         </div>
                                     </div>
@@ -87,7 +80,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <input type="text"
+                                                   name="designation"
                                                    class="form-control form-control-alternative"
+                                                   value="<%- contact.designation %>"
                                                    placeholder="Designation">
                                         </div>
                                     </div>
@@ -96,18 +91,21 @@
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <input type="email" name="email" placeholder="person@maafushivaru.com"
+                                                   value="<%- contact.email %>"
                                                    class="form-control form-control-alternative">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <input type="text" placeholder="+960 777 9999" name="phone"
+                                                   value="<%- contact.phone %>"
                                                    class="form-control form-control-alternative">
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="number" name="email" placeholder="Ext."
+                                            <input type="number" name="extension" placeholder="Ext."
+                                                   value="<%- contact.extension %>"
                                                    class="form-control form-control-alternative">
                                         </div>
                                     </div>

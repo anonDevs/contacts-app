@@ -55,17 +55,35 @@
         <div class="row">
             <div class="col">
                 <div class="card shadow">
+                    <% if  (departments.length == 0){ %>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--text">There are no Departments yet! Please <a
+                                        href="/departments/add">add some</a> or you <strong>cannot add contacts!</strong></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <% } %>
+                    <% if  (flash.danger){ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--text"><%- flash.danger %></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <% } %>
                     <div class="card-header border-0">
                         <h1 class="mb-3">Add Contact</h1>
                     </div>
                     <div class="container-fluid">
-                        <form>
+                        <form action="/contacts/add" method="post">
                             <h6 class="heading-small text-muted mb-4">Contact information</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <input type="text"
+                                                   required
                                                    name="name" class="form-control form-control-alternative"
                                                    placeholder="Name">
                                         </div>
@@ -75,10 +93,9 @@
                                             <select name="department" class="form-control"
                                                     id="exampleFormControlSelect1">
                                                 <option selected disabled>Department</option>
-                                                <option>IT</option>
-                                                <option>Front Office</option>
-                                                <option>Housekeeping</option>
-                                                <option>Accounts</option>
+                                                <% departments.forEach(department => { %>
+                                                    <option value="<%- department._id %>"><%- department.name %></option>
+                                                <% }) %>
                                             </select>
                                         </div>
                                     </div>
@@ -87,6 +104,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <input type="text"
+                                                   required
+                                                   name="designation"
                                                    class="form-control form-control-alternative"
                                                    placeholder="Designation">
                                         </div>
@@ -107,12 +126,13 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="number" name="email" placeholder="Ext."
+                                            <input type="number" name="extension" placeholder="Ext."
                                                    class="form-control form-control-alternative">
                                         </div>
                                     </div>
                                 </div>
-                                <input type="submit" value="Save" class="btn btn-block btn-primary mt-4">
+                                <input <%- departments.length == 0 ? 'disabled' : null %> type="submit" value="Save"
+                                                                                          class="btn btn-block btn-primary mt-4">
                             </div>
                         </form>
                     </div>

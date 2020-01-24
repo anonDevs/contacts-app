@@ -14,7 +14,16 @@ router
 router
   .route("/add")
   .get(checkNotLoggedIn, checkIfAdmin, userController.renderAddUser)
-  .post(userController.addUser);
+  .post(checkNotLoggedIn, checkIfAdmin, userController.addUser);
+
+router
+  .route("/edit/:id")
+  .get(checkNotLoggedIn, checkIfAdmin, userController.renderEditUser)
+  .post(checkNotLoggedIn, checkIfAdmin, userController.editUser);
+
+router
+  .route("/delete/:id")
+  .get(checkNotLoggedIn, checkIfAdmin, userController.deleteUser);
 
 router
   .route("/resetpass/:id")

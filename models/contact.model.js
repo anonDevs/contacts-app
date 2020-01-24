@@ -8,6 +8,9 @@ const contactSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectID,
     ref: "Department"
   },
+  designation: {
+    type: String
+  },
   phone: {
     type: String
   },

@@ -46,14 +46,6 @@
         <div class="row">
             <div class="col">
                 <div class="card shadow">
-                    <% if  (flash.success){ %>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--text"><%- flash.success %></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <% } %>
                     <% if  (flash.danger){ %>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <span class="alert-inner--text"><%- flash.danger %></span>
@@ -62,34 +54,43 @@
                             </button>
                         </div>
                     <% } %>
-
                     <div class="card-header border-0">
-                        <h1 class="mb-3">User Management</h1>
+                        <h1 class="mb-3">Search Results for : <%- query %></h1>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                             <tr>
-                                <th scope="col">Username</th>
-                                <th scope="col">Admin / User</th>
-                                <th scope="col">password</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Designation</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Extension</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <% users.forEach(user => { %>
+                            <% contacts.forEach(contact => { %>
                                 <tr>
-                                    <th scope="row">
-                                        <%- user.username %>
-                                    </th>
-                                    <td>
-                                        <%- user.admin ? 'Admin' : 'User' %>
+                                    <td scope="row">
+                                        <%- contact.name %>
                                     </td>
                                     <td>
-                                        <a href="/users/resetpass/<%- user._id %>" class="btn btn-sm btn-warning">Reset
-                                            Password</a>
-                                        <a href="/users/edit/<%- user._id %>" class="btn btn-sm"><i
+                                        <%- contact.designation %>
+                                    </td>
+                                    <td>
+                                        <%- contact.phone %>
+                                    </td>
+                                    <td>
+                                        <%- contact.extension %>
+                                    </td>
+                                    <td>
+                                        <a href="mailto:<%- contact.email %>"><%- contact.email %></a>
+                                    </td>
+                                    <td>
+                                        <a href="/contacts/edit/<%- contact._id %>" class="btn btn-sm"><i
                                                     class="ni ni-settings text-info"></i></a>
-                                        <a href="/users/delete/<%- user._id %>" class="confirm btn btn-sm"><i
+                                        <a href="/users/delete/<%- contacts._id %>" class="confirm btn btn-sm"><i
                                                     class="ni ni-fat-delete text-danger"></i></a>
                                     </td>
                                 </tr>

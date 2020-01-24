@@ -13,7 +13,9 @@ const addAdminIfNoUsers = async (username, password) => {
               password: hash,
               admin: true
             });
-            console.log(verify);
+            console.log(
+              `A default user was created: \nusername: ${username}\npassword: ${password}`
+            );
           } catch (e) {
             console.log(e);
           }

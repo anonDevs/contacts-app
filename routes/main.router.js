@@ -4,7 +4,9 @@ const mainController = require("../controllers/main.controller");
 const authController = require("../controllers/auth.controller");
 const {checkLoggedIn, checkNotLoggedIn} = require("../middleware/middleware");
 
-router.route("/").get(checkNotLoggedIn, mainController.renderContacts);
+router.route("/").get(checkNotLoggedIn, (req, res) => {
+  res.redirect('/contacts')
+});
 
 router
   .route("/login")

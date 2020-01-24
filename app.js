@@ -34,9 +34,12 @@ app.use(flash());
 
 const mainRouter = require("./routes/main.router");
 const userRouter = require("./routes/user.router");
+const departmentRouter = require("./routes/department.router");
+const contactRouter = require("./routes/contact.router");
 
 app.use("/", mainRouter);
-// app.use("/contacts", contactsRouter);
 app.use("/users", userRouter);
+app.use("/departments", departmentRouter);
+app.use("/contacts", contactRouter);
 
 module.exports = app;

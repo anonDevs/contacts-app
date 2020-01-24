@@ -35,7 +35,6 @@ exports.logInUser = async (req, res) => {
 };
 
 exports.logOutUser = (req, res) => {
-  console.log(req.session);
   req.session.destroy(err => {
     if (err) {
       console.log(err);

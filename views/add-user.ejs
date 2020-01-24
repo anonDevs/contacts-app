@@ -29,16 +29,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
         <div class="container-fluid">
             <!-- Form -->
-            <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-                <div class="form-group mb-0">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Search" type="text">
-                    </div>
-                </div>
-            </form>
+            <%- include('./partials/searchForm.ejs')%>
         </div>
     </nav>
     <!-- End Navbar -->
@@ -68,52 +59,51 @@
                     </div>
                     <div class="container-fluid">
                         <form action="/users/add" method="post">
-                            <form action="/users/add" method="post">
-                                <h6 class="heading-small text-muted mb-4">User Information</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="text"
-                                                       name="username" class="form-control form-control-alternative"
-                                                       placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <label for="isAdmin" class="d-lg-block text-xl-right">Is this an
-                                                Administrator
-                                                ?</label>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label class="custom-toggle">
-                                                    <input name="admin" id="isAdmin" type="checkbox">
-                                                    <span class="custom-toggle-slider rounded-circle"></span>
-                                                </label>
-                                            </div>
+                            <h6 class="heading-small text-muted mb-4">User Information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   name="username" class="form-control form-control-alternative"
+                                                   placeholder="Name">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="password"
-                                                       name="password"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="Password">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="password"
-                                                       name="confirmPassword"
-                                                       class="form-control form-control-alternative"
-                                                       placeholder="Confirm Password">
-                                            </div>
+                                    <div class="col-lg-3">
+                                        <label for="isAdmin" class="d-lg-block text-xl-right">Is this an
+                                            Administrator
+                                            ?</label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="custom-toggle">
+                                                <input name="admin" id="isAdmin" type="checkbox">
+                                                <span class="custom-toggle-slider rounded-circle"></span>
+                                            </label>
                                         </div>
                                     </div>
-                                    <input type="submit" value="Save" class="btn btn-block btn-primary mt-4">
                                 </div>
-                            </form>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="password"
+                                                   name="password"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="password"
+                                                   name="confirmPassword"
+                                                   class="form-control form-control-alternative"
+                                                   placeholder="Confirm Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Save" class="btn btn-block btn-primary mt-4">
+                            </div>
+                        </form>
                     </div>
                     <div class="card-footer py-4">
                         <nav aria-label="...">

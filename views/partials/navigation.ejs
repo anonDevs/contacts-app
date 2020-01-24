@@ -31,7 +31,7 @@
                 </div>
             </div>
             <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
+            <form action="/contacts/search" method="get" class="mt-4 mb-3 d-md-none">
                 <div class="input-group input-group-rounded input-group-merge">
                     <input type="search" class="form-control form-control-rounded form-control-prepended"
                            placeholder="Search" aria-label="Search">
@@ -82,45 +82,17 @@
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link  active " href="/contacts">
+                        <a class="nav-link" href="/contacts">
                             <i class="ni ni-bullet-list-67 text-red"></i> All Departments
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  active " href="/contacts/">
-                            <i class="ni ni-bullet-list-67 text-red"></i> IT
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts/">
-                            <i class="ni ni-bullet-list-67 text-red"></i> Front Office
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts/">
-                            <i class="ni ni-bullet-list-67 text-red"></i> F&B
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts">
-                            <i class="ni ni-bullet-list-67 text-red"></i> Admin & General
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts">
-                            <i class="ni ni-bullet-list-67 text-red"></i> Admin & General
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts">
-                            <i class="ni ni-bullet-list-67 text-red"></i> Diving
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contacts">
-                            <i class="ni ni-bullet-list-67 text-red"></i> Housekeeping
-                        </a>
-                    </li>
+                    <% departments.forEach(department => { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts/<%- department._id %>">
+                                <i class="ni ni-bullet-list-67 text-red"></i> <%- department.name %>
+                            </a>
+                        </li>
+                    <% }) %>
                 </ul>
             </div>
         </div>
