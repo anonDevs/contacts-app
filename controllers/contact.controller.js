@@ -24,7 +24,7 @@ exports.renderContactsByDepartment = async (req, res) => {
   try {
     const contacts = await Contact.find({
       department: req.params.departmentId
-    });
+    }).populate('department');
     const departments = await Department.find();
     const user = await User.findById(req.session.userId);
     const admin = user.admin;
@@ -32,7 +32,8 @@ exports.renderContactsByDepartment = async (req, res) => {
     res.render("contacts", {
       admin,
       departments,
-      contacts
+      contacts,
+      department: contacts[0].department.name
     });
   } catch (e) {
     console.log(e);
