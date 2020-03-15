@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+  superAdmin: {
+    type: Boolean,
+    default: false
   }
 });
 

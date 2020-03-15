@@ -56,11 +56,13 @@
                             <i class="ni ni-bullet-list-67 text-success"></i> All Department
                         </a>
                     </li>
+                    <%if ((typeof superAdmin !== "undefined") && superAdmin) {%>
                     <li class="nav-item">
                         <a class="nav-link" href="/users">
                             <i class="ni ni-bullet-list-67 text-success"></i> All Users
                         </a>
                     </li>
+                    <%}%>
                     <li class="nav-item">
                         <a class="nav-link" href="/contacts/add">
                             <i class="ni ni-fat-add text-info"></i> Add Contact

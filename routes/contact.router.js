@@ -3,6 +3,7 @@ const router = express.Router();
 const contactController = require("../controllers/contact.controller");
 const {
   checkIfAdmin,
+    checkIfSuperAdmin,
   checkLoggedIn,
   checkNotLoggedIn
 } = require("../middleware/middleware");
@@ -21,7 +22,7 @@ router
 
 router
   .route("/delete/:id")
-  .get(checkNotLoggedIn, checkIfAdmin, contactController.deleteContact);
+  .get(checkNotLoggedIn, checkIfAdmin, checkIfSuperAdmin, contactController.deleteContact);
 
 router
   .route("/search")

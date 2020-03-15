@@ -19,6 +19,14 @@ const contactSchema = new mongoose.Schema({
   },
   extension: {
     type: String
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectID,
+    ref: 'User'
+  },
+  lastModifiedBy: {
+    type: mongoose.Schema.Types.ObjectID,
+    ref: 'User'
   }
 });
 

@@ -22,7 +22,27 @@ exports.checkIfAdmin = async (req, res, next) => {
       next();
     } else {
       res.flash("danger", "Access is denied!");
-      res.redirect("/");
+      res.redirect("/contacts");
+    }
+  } catch (e) {
+    console.log(e);
+    res.flash(
+      "danger",
+      "There was an error with the system! Please contact the developer."
+    );
+    res.redirect("/");
+  }
+};
+
+exports.checkIfSuperAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.session.userId);
+
+    if (user.superAdmin) {
+      next();
+    } else {
+      res.flash("danger", "Access is denied!");
+      res.redirect("/contacts");
     }
   } catch (e) {
     console.log(e);

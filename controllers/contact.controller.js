@@ -6,12 +6,14 @@ exports.renderContacts = async (req, res) => {
   try {
     const user = await User.findById(req.session.userId);
     const departments = await Department.find();
-    const contacts = await Contact.find();
+    const contacts = await Contact.find().populate('createdBy').populate('lastModifiedBy');
 
     const admin = user.admin;
+    const superAdmin = user.superAdmin;
 
     res.render("contacts", {
       admin,
+      superAdmin,
       departments,
       contacts
     });
@@ -28,9 +30,11 @@ exports.renderContactsByDepartment = async (req, res) => {
     const departments = await Department.find();
     const user = await User.findById(req.session.userId);
     const admin = user.admin;
+    const superAdmin = user.superAdmin;
 
     res.render("contacts", {
       admin,
+      superAdmin,
       departments,
       contacts,
       department: contacts[0].department.name
@@ -56,6 +60,7 @@ exports.renderSearchedContacts = async (req, res) => {
     const departments = await Department.find();
     const user = await User.findById(req.session.userId);
     const admin = user.admin;
+    const superAdmin = user.superAdmin;
 
     const regex = new RegExp(req.query.q, "ig");
 
@@ -78,6 +83,7 @@ exports.renderSearchedContacts = async (req, res) => {
     res.render("searched-contacts", {
       query: req.query.q,
       admin,
+      superAdmin,
       departments,
       contacts
     });
@@ -112,8 +118,11 @@ exports.renderEditContact = async (req, res) => {
   try {
     const departments = await Department.find();
     const contact = await Contact.findById(req.params.id);
+    const user = await User.findById(req.session.userId);
+    console.log(user)
     res.render("edit-contact", {
       admin: true,
+      superAdmin: user.superAdmin,
       departments,
       contact
     });
@@ -136,6 +145,7 @@ exports.addContact = async (req, res) => {
     }
     const contact = await Contact.create({
       name: req.body.name,
+      createdBy: req.session.userId,
       designation: req.body.designation,
       department: req.body.department,
       phone: req.body.phone,
@@ -172,6 +182,7 @@ exports.editContact = async (req, res) => {
     req.body.phone ? (update.phone = req.body.phone) : null;
     req.body.email ? (update.email = req.body.email) : null;
     req.body.extension ? (update.extension = req.body.extension) : null;
+    update.lastModifiedBy = req.session.userId;
 
     await Contact.findByIdAndUpdate(req.params.id, update);
     console.log(update);

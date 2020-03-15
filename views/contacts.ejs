@@ -97,6 +97,10 @@
                                 <th scope="col">Extension</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Actions</th>
+                                <%if((typeof superAdmin !== "undefined") && superAdmin){%>
+                                    <th scope="col">Created By</th>
+                                    <th scope="col">Last Modified By</th>
+                                <%}%>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,6 +127,10 @@
                                         <a href="/contacts/delete/<%- contact._id %>" class="confirm btn btn-sm"><i
                                                     class="ni ni-fat-delete text-danger"></i></a>
                                     </td>
+                                    <%if((typeof superAdmin !== "undefined") && superAdmin){%>
+                                        <td class="text-capitalize"><% if(typeof contact.createdBy !== 'undefined'){%><%- contact.createdBy.username %><%}%></td>
+                                        <td class="text-capitalize"><% if(typeof contact.lastModifiedBy !== 'undefined'){%><%- contact.lastModifiedBy.username %><%}%></td>
+                                    <%}%>
                                 </tr>
                             <% }) %>
                             </tbody>

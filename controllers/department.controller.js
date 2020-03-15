@@ -1,12 +1,15 @@
 const Department = require("../models/department.model");
 const Contact = require("../models/contact.model");
+const User = require('../models/user.model')
 
 exports.renderDepartments = async (req, res) => {
   try {
     const departments = await Department.find();
+    const user = await User.findById(req.session.userId);
 
     res.render("departments", {
       admin: true,
+      superAdmin: user.superAdmin,
       departments
     });
   } catch (e) {
@@ -22,8 +25,10 @@ exports.renderDepartments = async (req, res) => {
 exports.renderAddDepartment = async (req, res) => {
   try {
     const departments = await Department.find();
+    const user = await User.findById(req.session.userId)
     res.render("add-department", {
       admin: true,
+      superAdmin: user.superAdmin,
       departments
     });
   } catch (e) {
@@ -40,8 +45,10 @@ exports.renderEditDepartment = async (req, res) => {
   try {
     const departments = await Department.find();
     const department = await Department.findById(req.params.id);
+    const user = await User.findById(req.session.userId);
     res.render("edit-department", {
       admin: true,
+      superAdmin: user.superAdmin,
       department,
       departments
     });

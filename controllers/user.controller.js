@@ -6,8 +6,10 @@ exports.renderUsers = async (req, res) => {
   try {
     const departments = await Department.find();
     const users = await User.find();
+    const user = await User.findById(req.session.userId)
     res.render("users", {
       admin: true,
+      superAdmin: user.superAdmin,
       users,
       departments
     });
@@ -25,8 +27,10 @@ exports.renderResetPass = async (req, res) => {
   try {
     const departments = await Department.find();
     const user = await User.findById(req.params.id);
+    const currUser = await User.findById(req.session.userId);
     res.render("reset-pass", {
       admin: true,
+      superAdmin: currUser.superAdmin,
       user,
       departments
     });
@@ -46,6 +50,7 @@ exports.renderAddUser = async (req, res) => {
 
     res.render("add-user", {
       admin: true,
+      superAdmin: true,
       departments
     });
   } catch (e) {
@@ -69,6 +74,7 @@ exports.renderEditUser = async (req, res) => {
     }
     res.render("edit-user", {
       admin: true,
+      superAdmin: true,
       user,
       departments
     });
@@ -83,12 +89,17 @@ exports.renderEditUser = async (req, res) => {
 };
 
 exports.addUser = async (req, res) => {
-  const {username, password, confirmPassword, admin} = req.body;
-  let isAdmin;
+  const {username, password, confirmPassword, admin, superAdmin} = req.body;
+  let isAdmin, isSuperAdmin;
   if (admin == undefined) {
     isAdmin = false;
   } else if (admin == "on") {
     isAdmin = true;
+  }
+  if (superAdmin == undefined) {
+    isSuperAdmin = false;
+  } else if (superAdmin == "on") {
+    isSuperAdmin = true;
   }
   try {
     const userExists = await User.findOne({
@@ -110,7 +121,8 @@ exports.addUser = async (req, res) => {
     const user = await User.create({
       username,
       password: hash,
-      admin: isAdmin
+      admin: isAdmin,
+      superAdmin: isSuperAdmin
     });
     if (user) {
       res.flash("success", "The user has been created successfully!");
